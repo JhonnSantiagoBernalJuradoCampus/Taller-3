@@ -1,12 +1,13 @@
 let miFormularioCampus = document.querySelector("#miFormularioCampus");
-let miFormularioPersonas = document.querySelector("#miFormularioPersonas");
+let miFormularioPersonas = document.querySelector("#miFormularioCampers");
+let miFormularioTrainers = document.querySelector("#miFormularioTrainers")
 let campus = {};
 
 
 miFormularioCampus.addEventListener("submit", (e)=>{
     e.preventDefault();
     let data = Object.fromEntries(new FormData(e.target))
-    campus[`${data.nombreSede}`] = {Camper: [], Trainers: []};
+    campus[`${data.nombreSede}`] = {Campers: [], Trainers: []};
     listaSedes();
     miFormularioCampus.reset();
 })
@@ -21,13 +22,24 @@ let listaSedes = ()=>{
     }
 }
 
-miFormularioPersonas.addEventListener("submit", (e)=>{
+miFormularioCampers.addEventListener("submit", (e)=>{
     e.preventDefault();
     let data = Object.fromEntries(new FormData(e.target));
     console.log(data);
     let sede = data.sede;
     delete data.sede;
-    campus[`${sede}`]["Camper"].unshift(data);
+    campus[`${sede}`]["Campers"].unshift(data);
     console.log(campus);
     miFormularioPersonas.reset();
 })
+miFormularioTrainers.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    let data = Object.fromEntries(new FormData(e.target));
+    console.log(data);
+    let sede = data.sede;
+    delete data.sede;
+    campus[`${sede}`]["Trainers"].unshift(data);
+    console.log(campus);
+    miFormularioTrainers.reset();
+})
+
